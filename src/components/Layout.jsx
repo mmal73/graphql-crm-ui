@@ -1,19 +1,15 @@
-import Head from 'next/head';
 import React from 'react';
 import Sidebar from './Sidebar';
 
 const Layout = ({children}) => {
   return (
     <>
-      <Head>
-        <link rel="preconnect" href="https://fonts.googleapis.com"/>
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
-        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
-      </Head>
+    <div className="flex bg-gray-200 min-h-screen ">
       <Sidebar/>
-      <main>
+      <main className="sm:2/3 sm:min-h-screen md:w-4/5 p-5">
         {children}
       </main>
+    </div>
     </>
   );
 }
