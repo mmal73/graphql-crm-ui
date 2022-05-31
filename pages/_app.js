@@ -6,7 +6,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <title key="title">CRM GrapQL</title>
+        <title key="title">CRM GraphQL</title>
         <meta key="description" name="description" content="Contact me!" />
       </Head>
       <Component {...pageProps} />
