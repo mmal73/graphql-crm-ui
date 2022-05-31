@@ -10,6 +10,15 @@ const Layout = ({ children }) => {
       <>
         <div className="bg-slate-50 min-h-screen flex flex-col justify-center">
           <main className="bg-slate-50">{children}</main>
+          <p className="text-xs text-gray-500 mt-3 text-center">
+            Author:
+            <a
+              href="https://github.com/mmal73"
+              className="font-bold text-blue-500"
+            >
+              @mmal73
+            </a>
+          </p>
         </div>
       </>
     );
