@@ -1,10 +1,25 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Layout from '../src/layouts/Layout';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { gql, useMutation } from '@apollo/client';
 
+const NEW_USER = gql`
+  mutation newUser($input: UserInput) {
+    newUser(input: $input) {
+      id
+      name
+      email
+    }
+  }
+`;
 const Signup = () => {
+  const router = useRouter();
+
+  const [newUser, { data, loading, error }] = useMutation(NEW_USER);
+
   const userFields = [
     {
       name: 'name',
@@ -34,10 +49,10 @@ const Signup = () => {
 
   const formik = useFormik({
     initialValues: {
-      name: '',
-      lastname: '',
-      email: '',
-      password: '',
+      name: 'Luis',
+      lastname: 'Mendoza',
+      email: 'test@gmail.com',
+      password: 'password123A*',
     },
     validationSchema: yup.object({
       name: yup.string().required('Name is required'),
@@ -55,10 +70,27 @@ const Signup = () => {
         .min(8)
         .required('Password is required'),
     }),
-    onSubmit: (values) => {
-      console.log(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      const { name, lastname, email, password } = values;
+      try {
+        await newUser({
+          variables: {
+            input: {
+              name,
+              lastname,
+              email,
+              password,
+            },
+          },
+        });
+        router.push('/signin');
+      } catch (error) {
+        console.log(error.message);
+      }
     },
   });
+
+  if (loading) return 'Loading...';
 
   return (
     <div>
@@ -66,11 +98,13 @@ const Signup = () => {
         <h1 className="text-center text-3xl font-bold text-blue-500">
           Sign Up
         </h1>
-        <form
-          className="container mx-auto flex justify-center"
-          onSubmit={formik.handleSubmit}
-        >
-          <div className="lg:w-1/3 bg-white rounded-lg p-8 flex flex-col mt-10 z-10 shadow-md">
+        {error && (
+          <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-1 w-1/3 mx-auto mt-5 text-center">
+            <p>{error.message}</p>
+          </div>
+        )}
+        <form className="flex justify-center" onSubmit={formik.handleSubmit}>
+          <div className="lg:w-1/3 bg-white rounded-lg p-8 flex flex-col z-10 shadow-md mt-2">
             {userFields.map(({ name, title, placeholder, type }) => (
               <div key={name} className="relative mb-4">
                 <label

@@ -1,5 +1,7 @@
 import '../styles/globals.css';
 import Head from 'next/head';
+import { ApolloProvider } from '@apollo/client';
+import client from '../config/apollo-client';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -9,7 +11,9 @@ function MyApp({ Component, pageProps }) {
         <title key="title">CRM GraphQL</title>
         <meta key="description" name="description" content="Contact me!" />
       </Head>
-      <Component {...pageProps} />
+      <ApolloProvider client={client}>
+        <Component {...pageProps} />
+      </ApolloProvider>
     </>
   );
 }
