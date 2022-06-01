@@ -6,7 +6,7 @@ const AuthLayout = ({ children }) => {
     <>
       <div className="flex min-h-screen relative">
         <Sidebar />
-        <main className="bg-slate-50 sm:w-2/3 sm:min-h-screen md:w-4/5 p-5">
+        <main className="bg-slate-50 sm:w-2/3 sm:min-h-screen md:w-4/5 p-8">
           {children}
         </main>
         <p className="text-xs text-gray-500 mt-3 text-center absolute bottom-0 left-2/4">
