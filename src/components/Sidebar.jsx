@@ -11,17 +11,17 @@ const Sidebar = () => {
     {
       name: 'Clients',
       url: '/',
-      active: pathname === '/',
+      active: pathname === '/' || pathname.includes('/clients/'),
     },
     {
       name: 'Orders',
       url: '/orders',
-      active: pathname === '/orders',
+      active: pathname === '/orders' || pathname.includes('/orders/'),
     },
     {
       name: 'Products',
       url: '/products',
-      active: pathname === '/products',
+      active: pathname === '/products' || pathname.includes('/products/'),
     },
   ];
 

@@ -57,7 +57,7 @@ const Create = () => {
     update(cache, { data: { newClient } }) {
       cache.modify({
         fields: {
-          getClients(existingclients = []) {
+          getClients(existingclientsRefs = [], { readField }) {
             const newClientRef = cache.writeFragment({
               data: newClient,
               fragment: gql`
@@ -71,7 +71,16 @@ const Create = () => {
                 }
               `,
             });
-            return [...existingclients, newClientRef];
+
+            if (
+              existingclientsRefs.some(
+                (ref) => readField('id', ref) === newClient.id
+              )
+            ) {
+              return existingclientsRefs;
+            }
+
+            return [...existingclientsRefs, newClientRef];
           },
         },
       });
@@ -80,9 +89,9 @@ const Create = () => {
   const formik = useFormik({
     initialValues: {
       name: 'Client',
-      lastname: '3',
+      lastname: '',
       company: 'Company 1',
-      email: 'client2@company2.com',
+      email: 'client@company.com',
       phone: '9876543212',
     },
     validationSchema: yup.object({
