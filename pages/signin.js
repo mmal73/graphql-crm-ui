@@ -1,14 +1,28 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Layout from '../src/layouts/Layout';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { gql, useMutation } from '@apollo/client';
+
+const AUTHENTICATE_USER = gql`
+  mutation authenticateUser($input: authenticateInput) {
+    authenticateUser(input: $input) {
+      token
+    }
+  }
+`;
 
 const Signin = () => {
+  const router = useRouter();
+
+  const [authenticateUser, { loading, error }] = useMutation(AUTHENTICATE_USER);
+
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
+      email: 'test@gmail.com',
+      password: 'password123A*',
     },
     validationSchema: yup.object({
       email: yup
@@ -17,10 +31,29 @@ const Signin = () => {
         .required('Email is required'),
       password: yup.string().required('Password is required'),
     }),
-    onSubmit: (values) => {
-      console.log(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      const { email, password } = values;
+      try {
+        const { data } = await authenticateUser({
+          variables: {
+            input: {
+              email,
+              password,
+            },
+          },
+        });
+
+        const { token } = data.authenticateUser;
+        localStorage.setItem('token', token);
+
+        router.push('/');
+      } catch (error) {
+        console.log(error.message);
+      }
     },
   });
+
+  if (loading) return 'Loading...';
 
   return (
     <div>
@@ -28,6 +61,11 @@ const Signin = () => {
         <h1 className="text-center text-3xl font-bold text-blue-500">
           Sign In
         </h1>
+        {error && (
+          <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-1 w-1/3 mx-auto mt-5 text-center">
+            <p>{error.message}</p>
+          </div>
+        )}
         <form
           className="container mx-auto flex justify-center"
           onSubmit={formik.handleSubmit}

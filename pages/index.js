@@ -1,6 +1,23 @@
+import { gql, useQuery } from '@apollo/client';
 import Layout from '../src/layouts/Layout';
 
+const GET_CLIENTS = gql`
+  query getClients {
+    getClients {
+      id
+      name
+      lastname
+      company
+      email
+      phone
+    }
+  }
+`;
 const Home = () => {
+  const { data, loading, error } = useQuery(GET_CLIENTS);
+
+  if (loading) return 'Loading...';
+
   return (
     <div>
       <Layout>
