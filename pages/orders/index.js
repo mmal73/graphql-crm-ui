@@ -1,4 +1,4 @@
-import Layout from '../src/layouts/Layout';
+import Layout from '../../src/layouts/Layout';
 
 const Orders = () => {
   return (

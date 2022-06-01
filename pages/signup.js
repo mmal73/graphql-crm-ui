@@ -1,10 +1,10 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import Layout from '../src/layouts/Layout';
+import { gql, useMutation } from '@apollo/client';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { gql, useMutation } from '@apollo/client';
+import Layout from '../src/layouts/Layout';
 
 const NEW_USER = gql`
   mutation newUser($input: UserInput) {

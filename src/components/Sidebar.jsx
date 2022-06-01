@@ -26,7 +26,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className="sm:w-1/3 sm:min-h-screen md:w-1/5 p-5">
+    <aside className="bg-slate-50 sm:w-1/3 sm:min-h-screen md:w-1/5 p-5 border-r">
       <div className="mb-5">
         <p className="text-2xl text-blue-500 text-center font-bold">
           CRM GraphQL
@@ -39,8 +39,8 @@ const Sidebar = () => {
               key={url}
               className={
                 active
-                  ? 'mb-3 rounded-lg bg-blue-500 text-white'
-                  : 'mb-3 rounded-lg text-blue-500'
+                  ? 'shadow mb-4 rounded-lg bg-blue-500 text-white'
+                  : 'shadow mb-4 rounded-lg text-blue-500'
               }
             >
               <Link href={url}>
