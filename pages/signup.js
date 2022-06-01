@@ -90,7 +90,7 @@ const Signup = () => {
     },
   });
 
-  if (loading) return 'Loading...';
+  if (loading || data) return 'Loading...';
 
   return (
     <div>

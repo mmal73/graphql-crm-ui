@@ -16,7 +16,7 @@ const GET_CLIENTS = gql`
 const Home = () => {
   const { data, loading, error } = useQuery(GET_CLIENTS);
 
-  if (loading) return 'Loading...';
+  if (loading || data) return 'Loading...';
 
   return (
     <div>

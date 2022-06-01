@@ -8,10 +8,12 @@ const link = new HttpLink({
 });
 
 const authLink = setContext((request, previousContext) => {
-  const token = localStorage.getItem('token') || null;
-  return {
-    headers: { authorization: `Bearer ${token}` },
-  };
+  const token = localStorage.getItem('token');
+  if (token) {
+    return {
+      headers: { authorization: `Bearer ${token}` },
+    };
+  }
 });
 
 const resetToken = onError(({ networkError }) => {

@@ -17,7 +17,8 @@ const AUTHENTICATE_USER = gql`
 const Signin = () => {
   const router = useRouter();
 
-  const [authenticateUser, { loading, error }] = useMutation(AUTHENTICATE_USER);
+  const [authenticateUser, { data, loading, error }] =
+    useMutation(AUTHENTICATE_USER);
 
   const formik = useFormik({
     initialValues: {
@@ -53,7 +54,7 @@ const Signin = () => {
     },
   });
 
-  if (loading) return 'Loading...';
+  if (loading || data) return 'Loading...';
 
   return (
     <div>
