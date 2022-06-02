@@ -1,6 +1,6 @@
 import { gql, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
-import ClientItem from '../src/components/ClientItem';
+import ClientItem from '../src/clients/ClientItem';
 import MyLink from '../src/components/MyLink';
 import Layout from '../src/layouts/Layout';
 

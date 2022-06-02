@@ -17,12 +17,7 @@ const authLink = setContext((request, previousContext) => {
 });
 
 const resetToken = onError(({ networkError }) => {
-  if (
-    networkError &&
-    networkError.name === 'ServerError' &&
-    networkError.statusCode >= 400 &&
-    networkError.statusCode < 500
-  ) {
+  if (networkError && networkError.name === 'AuthenticationError') {
     localStorage.removeItem('token');
   }
 });

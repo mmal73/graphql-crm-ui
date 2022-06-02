@@ -1,4 +1,5 @@
 import React from 'react';
+import Router from 'next/router';
 import Swal from 'sweetalert2';
 import { gql, useMutation } from '@apollo/client';
 
@@ -50,6 +51,13 @@ const ClientItem = ({ client }) => {
     });
   };
 
+  const handleEditClient = () => {
+    Router.push({
+      pathname: '/clients/[id]',
+      query: { id },
+    });
+  };
+
   return (
     <tr key={id}>
       <td className="p-1 text-slate-500">{name}</td>
@@ -59,9 +67,9 @@ const ClientItem = ({ client }) => {
       <td className="p-1 text-slate-500">{phone}</td>
       <td className="p-1 text-slate-500">
         <button
-          onClick={handleDeleteClient}
           className="mb-1 py-1 px-2 bg-red-600 text-white rounded-md uppercase flex justify-between items-center text-sm uppercase font-bold"
           type="button"
+          onClick={handleDeleteClient}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -81,6 +89,7 @@ const ClientItem = ({ client }) => {
         <button
           className="mb-1 py-1 px-2 bg-blue-600 text-white rounded-md uppercase flex justify-between items-center text-sm uppercase font-bold"
           type="button"
+          onClick={handleEditClient}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
