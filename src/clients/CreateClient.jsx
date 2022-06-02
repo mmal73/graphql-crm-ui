@@ -1,6 +1,5 @@
 import React from 'react';
 import Router from 'next/router';
-import * as yup from 'yup';
 import { gql, useMutation } from '@apollo/client';
 import FormClient from './FormClient';
 
