@@ -20,7 +20,8 @@ const resetToken = onError(({ networkError }) => {
   if (
     networkError &&
     networkError.name === 'ServerError' &&
-    networkError.statusCode === 401
+    networkError.statusCode >= 400 &&
+    networkError.statusCode < 500
   ) {
     localStorage.removeItem('token');
   }
