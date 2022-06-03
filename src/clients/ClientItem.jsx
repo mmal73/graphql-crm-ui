@@ -42,7 +42,6 @@ const ClientItem = ({ client }) => {
               id: id,
             },
           });
-          console.log(data);
           Swal.fire('Deleted!', data.deleteClient, 'success');
         } catch (error) {
           Swal.fire('Error!', error.message, 'error');

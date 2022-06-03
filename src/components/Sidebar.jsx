@@ -26,7 +26,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className="bg-slate-50 sm:w-1/3 sm:min-h-screen md:w-1/5 p-5 border-r">
+    <aside className="bg-slate-50 w-full md:min-h-screen md:w-1/5 p-5 border-r">
       <div className="mb-5">
         <p className="text-2xl text-blue-500 text-center font-bold">
           CRM GraphQL

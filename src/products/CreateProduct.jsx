@@ -19,7 +19,6 @@ const CreateProduct = () => {
       cache.modify({
         fields: {
           getProducts(existingProductsRefs = [], { readField }) {
-            console.log(existingProductsRefs);
             const newProductRef = cache.writeFragment({
               data: newProduct,
               fragment: gql`

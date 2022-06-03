@@ -5,9 +5,9 @@ import Sidebar from '../components/Sidebar';
 const AuthLayout = ({ children }) => {
   return (
     <>
-      <div className="flex min-h-screen relative">
+      <div className="flex flex-col md:flex-row min-h-screen relative">
         <Sidebar />
-        <main className="bg-white sm:w-2/3 sm:min-h-screen md:w-4/5">
+        <main className="bg-white sm:w-full sm:min-h-screen md:w-4/5">
           <Header />
           <section className="p-8">{children}</section>
         </main>
