@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import { gql, useQuery } from '@apollo/client';
 import Layout from '../../src/layouts/Layout';
 import MyLink from '../../src/components/MyLink';
@@ -6,6 +7,7 @@ import ProductItem from '../../src/products/ProductItem';
 import GET_PRODUCTS from '../../src/products/queries';
 
 const Products = () => {
+  const router = useRouter();
   const tHeaders = ['id', 'name', 'stock', 'price', ''];
 
   const { data, loading, error } = useQuery(GET_PRODUCTS);

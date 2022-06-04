@@ -6,6 +6,7 @@ import Layout from '../../src/layouts/Layout';
 import AssignClient from '../../src/orders/AssignClient';
 import AssignProducts from '../../src/orders/AssignProducts';
 import ResumeOrder from '../../src/orders/ResumeOrder';
+import Swal from 'sweetalert2';
 
 const NEW_ORDER = gql`
   mutation newOrder($input: OrderInput) {
@@ -30,9 +31,9 @@ const Create = () => {
 
   const handleCreateOrder = async () => {
     const { id } = client;
-    const order = products.map(
-      ({ __typename, name, price, stock, ...product }) => ({ ...product })
-    );
+    const order = products.map(({ __typename, stock, ...product }) => ({
+      ...product,
+    }));
     try {
       await newOrder({
         variables: {
@@ -44,19 +45,26 @@ const Create = () => {
           },
         },
       });
+      Swal.fire({
+        icon: 'success',
+        title: `Correct`,
+        text: 'Order created',
+      });
       router.push('/orders');
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  if (loading) {
-    return 'Loading...';
-  }
   return (
     <Layout>
       <h2 className="text-3xl font-bold">Create Order</h2>
-      <form className="flex flex-col items-center">
+      {error && (
+        <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-1 w-full mx-auto mt-5 text-center">
+          <p>{error.message}</p>
+        </div>
+      )}
+      <div className="flex flex-col items-center">
         <div className="w-2/3 mb-3 shadow p-2">
           <AssignClient />
         </div>
@@ -79,7 +87,8 @@ const Create = () => {
             Create
           </button>
         </div>
-      </form>
+      </div>
+      s
     </Layout>
   );
 };

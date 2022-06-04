@@ -13,6 +13,9 @@ const OrdersState = ({ children }) => {
   const [ordersState, dispatch] = useReducer(OrdersReducer, initialState);
 
   const addClient = (client) => {
+    if (!client) {
+      return;
+    }
     dispatch({
       type: ORDER_ACTIONS.SELECT_CLIENT,
       payload: client,

@@ -35,10 +35,14 @@ const AssignClient = () => {
   return (
     <>
       <p className="m-1">Assign client</p>
+      {error && (
+        <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-1 w-full mx-auto mt-5 text-center">
+          <p>{error.message}</p>
+        </div>
+      )}
       <Select
         id="clients-select"
         instanceId="clients-select"
-        /* defaultValue={[allClients[0]]} */
         name="clients"
         onChange={(client) => handleChangeClient(client)}
         options={allClients}
