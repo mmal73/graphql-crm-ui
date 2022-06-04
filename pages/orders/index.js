@@ -1,7 +1,23 @@
 import Layout from '../../src/layouts/Layout';
 import MyLink from '../../src/components/MyLink';
+import { gql, useQuery } from '@apollo/client';
 
+const GET_ORDERS = gql`
+  query getOrders {
+    getOrders {
+      id
+      client
+      status
+    }
+  }
+`;
 const Orders = () => {
+  const { data, loading, error } = useQuery(GET_ORDERS);
+  const tHeaders = ['Client', 'Status'];
+  if (loading) {
+    return 'Loading...';
+  }
+  const orders = data.getOrders;
   return (
     <div>
       <Layout>
@@ -9,7 +25,7 @@ const Orders = () => {
         <MyLink url="/orders/create" name="Create New" />
         <div className="relative rounded-xl bg-blue-500 overflow-auto mt-5">
           <div className="shadow-sm overflow-hidden py-5">
-            {/* products.length ? (
+            {orders.length ? (
               <table className="border-collapse table-auto w-full bg-white">
                 <thead>
                   <tr>
@@ -26,14 +42,17 @@ const Orders = () => {
                   </tr>
                 </thead>
                 <tbody className="">
-                  {products.map((product) => (
-                    <ProductItem key={product.id} product={product} />
+                  {orders.map((order) => (
+                    <tr key={order.id}>
+                      <td className="p-1 text-slate-500">{order.client}</td>
+                      <td className="p-1 text-slate-500">{order.status}</td>
+                    </tr>
                   ))}
                 </tbody>
               </table>
             ) : (
               <div className="text-center text-white">Empty</div>
-            ) */}
+            )}
           </div>
         </div>
       </Layout>

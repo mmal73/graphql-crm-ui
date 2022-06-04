@@ -3,17 +3,8 @@ import { gql, useQuery } from '@apollo/client';
 import Layout from '../../src/layouts/Layout';
 import MyLink from '../../src/components/MyLink';
 import ProductItem from '../../src/products/ProductItem';
+import GET_PRODUCTS from '../../src/products/queries';
 
-const GET_PRODUCTS = gql`
-  query getProducts {
-    getProducts {
-      id
-      name
-      stock
-      price
-    }
-  }
-`;
 const Products = () => {
   const tHeaders = ['id', 'name', 'stock', 'price', ''];
 
