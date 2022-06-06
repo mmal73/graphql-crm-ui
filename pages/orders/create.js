@@ -88,7 +88,6 @@ const Create = () => {
           </button>
         </div>
       </div>
-      s
     </Layout>
   );
 };

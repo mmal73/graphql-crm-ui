@@ -39,8 +39,8 @@ const Sidebar = () => {
               key={url}
               className={
                 active
-                  ? 'shadow mb-4 rounded-lg bg-blue-500 text-white'
-                  : 'shadow mb-4 rounded-lg text-blue-500'
+                  ? 'uppercase mb-4 rounded-lg bg-blue-500 text-white'
+                  : 'uppercase mb-4 rounded-lg bg-blue-100 text-gray-700'
               }
             >
               <Link href={url}>

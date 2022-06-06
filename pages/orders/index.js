@@ -1,19 +1,31 @@
 import Layout from '../../src/layouts/Layout';
 import MyLink from '../../src/components/MyLink';
 import { gql, useQuery } from '@apollo/client';
+import OrderItem from '../../src/orders/OrderItem';
 
 const GET_ORDERS = gql`
   query getOrders {
     getOrders {
       id
-      client
+      order {
+        id
+        name
+        quantity
+        price
+      }
+      client {
+        id
+        name
+        lastname
+      }
       status
+      total
     }
   }
 `;
 const Orders = () => {
   const { data, loading, error } = useQuery(GET_ORDERS);
-  const tHeaders = ['Client', 'Status'];
+  const tHeaders = ['Client', 'Status', 'Order', 'Total', ''];
   if (loading) {
     return 'Loading...';
   }
@@ -43,10 +55,7 @@ const Orders = () => {
                 </thead>
                 <tbody className="">
                   {orders.map((order) => (
-                    <tr key={order.id}>
-                      <td className="p-1 text-slate-500">{order.client}</td>
-                      <td className="p-1 text-slate-500">{order.status}</td>
-                    </tr>
+                    <OrderItem key={order.id} order={order} />
                   ))}
                 </tbody>
               </table>
