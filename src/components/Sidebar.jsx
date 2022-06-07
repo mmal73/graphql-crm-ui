@@ -23,6 +23,11 @@ const Sidebar = () => {
       url: '/products',
       active: pathname === '/products' || pathname.includes('/products/'),
     },
+    {
+      name: 'Best Sellers',
+      url: '/sellers',
+      active: pathname === '/sellers' || pathname.includes('/sellers/'),
+    },
   ];
 
   return (

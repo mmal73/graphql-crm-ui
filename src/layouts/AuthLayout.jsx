@@ -9,7 +9,7 @@ const AuthLayout = ({ children }) => {
         <Sidebar />
         <main className="bg-white sm:w-full sm:min-h-screen md:w-4/5">
           <Header />
-          <section className="p-8">{children}</section>
+          <section className="p-8 h-4/5">{children}</section>
         </main>
         <p className="text-xs text-gray-500 mt-3 text-center absolute bottom-0 left-2/4">
           Author:
