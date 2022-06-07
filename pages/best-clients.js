@@ -12,31 +12,32 @@ import {
 } from 'recharts';
 import { gql, useQuery } from '@apollo/client';
 
-const BEST_SELLERS = gql`
-  query bestSellers {
-    bestSellers {
-      seller {
+const BEST_CLIENTS = gql`
+  query bestClients {
+    bestClients {
+      client {
         name
       }
       total
     }
   }
 `;
-const Sellers = () => {
-  const { data, loading, startPolling, stopPolling } = useQuery(BEST_SELLERS);
+const BestClients = () => {
+  const { data, loading, startPolling, stopPolling } = useQuery(BEST_CLIENTS);
 
   useEffect(() => {
     startPolling(3000);
     return () => {
       stopPolling();
     };
-  }, [startPolling, stopPolling]);
+  }, [startPolling, stopPolling, loading]);
 
   if (loading) {
     return 'Loading...';
   }
-  const newBestSellers = data.bestSellers.map(({ seller, total }) => ({
-    ...seller[0],
+
+  const newBestClients = data.bestClients.map(({ client, total }) => ({
+    ...client[0],
     total,
   }));
 
@@ -47,7 +48,7 @@ const Sellers = () => {
           <BarChart
             width={500}
             height={300}
-            data={newBestSellers}
+            data={newBestClients}
             margin={{
               top: 5,
               right: 30,
@@ -68,4 +69,4 @@ const Sellers = () => {
   );
 };
 
-export default Sellers;
+export default BestClients;

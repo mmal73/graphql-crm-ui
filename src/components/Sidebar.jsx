@@ -28,6 +28,12 @@ const Sidebar = () => {
       url: '/sellers',
       active: pathname === '/sellers' || pathname.includes('/sellers/'),
     },
+    {
+      name: 'Best Clients',
+      url: '/best-clients',
+      active:
+        pathname === '/best-clients' || pathname.includes('/best-clients/'),
+    },
   ];
 
   return (
